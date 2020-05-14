@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import Poster from './Poster'
+import ShowBounty from './ShowBounty'
+import BountyForm from './BountyForm'
 
 const API_URL = 'https://react-bounty-api.herokuapp.com/v1/bounties'
 
@@ -30,7 +32,7 @@ function App() {
 
   let posters = bounties.map((b,i)=>{
     return(
-     <Poster key={i} bounty={b}/>  
+     <Poster key={i} bounty={b} refresh={callApi} currentId={currentBounty._id} changeCurrent={setCurrentBounty}/>  
       )
   })
 
@@ -42,6 +44,8 @@ function App() {
       </header>
       <main>
         {posters}
+        <ShowBounty currentBounty={currentBounty}/>
+        <BountyForm refresh={callApi}/>
       </main>
     </div>
   );
